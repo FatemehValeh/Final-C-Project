@@ -21,7 +21,7 @@ typedef struct{
 }cell;
 
 void add_cell(cell**head, int x, int y, char name[], int energy){
-    printf("*\n");
+    //printf("*\n");
     cell*new_cell=malloc(sizeof(cell));
     new_cell->x=x;
 
@@ -167,11 +167,11 @@ void get_cells(cell**head, unsigned char map[n][n], int table[n][n]){
         char name[200];
         scanf("%s", name);
         getchar();
-        printf("name is %s\n", name);
+        //printf("name is %s\n", name);
         x=rand_loc();
-        printf("x=%d\n", x);
+        //printf("x=%d\n", x);
         y=rand_loc();
-        printf("y=%d\n", y);
+        //printf("y=%d\n", y);
         while( forbidden(map, x, y) || occupied_table(table, x, y) ){
             //printf("loop\n");
             x=rand_loc();
@@ -465,7 +465,7 @@ cell* load(unsigned char map[n][n], int energy[n][n], int table[n][n]){
     //memset(table, 0, sizeof(table)*2*2);
     for(t=0; t<n; t++){
         for(k=0; k<n; k++){
-            printf("t=%d k=%d\n",t, k);
+           // printf("t=%d k=%d\n",t, k);
             //printf("*in loop energy[%d][%d]=%d\n",t, k, energy[t][k]);
             //printf("*in loop table[%d][%d]=%d\n",t, k, table[t][k]);
 
@@ -481,10 +481,10 @@ cell* load(unsigned char map[n][n], int energy[n][n], int table[n][n]){
             }
         }
     }
-    printf("22\n");
+    //printf("22\n");
     fclose(openmap);
     FILE* opencells=fopen("D:\savecells.txt", "r");
-    printf("33\n");
+    //printf("33\n");
     cell*head=malloc(sizeof(cell));
     head=NULL;
     char name[20];
@@ -495,8 +495,10 @@ cell* load(unsigned char map[n][n], int energy[n][n], int table[n][n]){
         table[y][x]=1;
         printf("in file: table[%d][%d] = %d\n", y , x , table[y][x]);
         add_cell(&head, x,y, name, energy1);
+
        // printf("44\n");
     }
+    my_print(map, table);
     fclose(opencells);
     int v, p;
     for(v=0; v<n; v++){
@@ -523,8 +525,8 @@ int i, j;
                 case 1:
                    // printf("x_choosed , y_choosed are %d %d\n", x_choosed_cell, y_choosed_cell);
                     move_menu(map, table , head, x_choosed_cell, y_choosed_cell);
-                    print_arr(table);
-                    printf("*test print\n");
+                    //print_arr(table);
+                    //printf("*test print\n");
             my_print(map,table);
                     break;
                 case 2:
@@ -809,22 +811,22 @@ int main()
 
 
 
-    printf("\nx:%d and y:%d\n", x_choosed_cell, y_choosed_cell);
-    cell*found=find_cell(head, x_choosed_cell, y_choosed_cell);
-    printf("x found= %d y found=%d\n", found->x, found->y);
+   // printf("\nx:%d and y:%d\n", x_choosed_cell, y_choosed_cell);
+    //cell*found=find_cell(head, x_choosed_cell, y_choosed_cell);
+    //printf("x found= %d y found=%d\n", found->x, found->y);
     ///move(map, table, head, x_choosed_cell, y_choosed_cell);
     //move_menu(map, table, head, x_choosed_cell, y_choosed_cell);
     ///print_arr(table);
     ///boost_energy(found, energy, map);
-    printf("found energy is %d\n", found->energy);
+    //printf("found energy is %d\n", found->energy);
     ///boost_energy(found, energy, map);
 
     //save(head, map);
     ///cell*loaded=load(map, energy);
     ///printf("* %s %d %d %d\n", loaded->name, loaded->x, loaded->y, loaded->energy);
-    printf("cell_num= %d\n", cell_num);
+    //printf("cell_num= %d\n", cell_num);
     ///print_list(loaded);
-    print_list(head);
+    //print_list(head);
 
     }
     return 0;
