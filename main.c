@@ -10,6 +10,7 @@ int cell_num; //number of cells
 int player=1, x, y;
 int x_choosed_cell, y_choosed_cell;//used when user want to choose his cell
 
+void my_print(unsigned char map[n][n], int table[n][n]);
 
 typedef struct{
     int x;
@@ -29,7 +30,7 @@ void add_cell(cell**head, int x, int y, char name[], int energy){
     strcpy(new_cell->name, name);
 
     new_cell->energy=energy;
-    printf("energy=%d\n", new_cell->energy);
+    //printf("energy=%d\n", new_cell->energy);
 
     cell*cur=*head;
     new_cell->next=NULL;
@@ -172,19 +173,19 @@ void get_cells(cell**head, unsigned char map[n][n], int table[n][n]){
         y=rand_loc();
         printf("y=%d\n", y);
         while( forbidden(map, x, y) || occupied_table(table, x, y) ){
-            printf("loop\n");
+            //printf("loop\n");
             x=rand_loc();
-            printf("1x=%d\n", x);
+            //printf("1x=%d\n", x);
             y=rand_loc();
-            printf("1y=%d\n", y);
-            printf("1map[%d][%d] = %c\n", y , x, map[y][x]);
-            printf("1table[%d][%d] = %d\n", y, x , table[y][x]);
+            //printf("1y=%d\n", y);
+            //printf("1map[%d][%d] = %c\n", y , x, map[y][x]);
+            //printf("1table[%d][%d] = %d\n", y, x , table[y][x]);
         }
         //fill_table(table, x, y, player);
         table[y][x]=player;
         add_cell(head, x, y, name, 0);
-        printf("map[%d][%d] = %c\n", y , x, map[y][x]);
-        printf("table[%d][%d] = %d\n", y, x , table[y][x]);
+        //printf("map[%d][%d] = %c\n", y , x, map[y][x]);
+        //printf("table[%d][%d] = %d\n", y, x , table[y][x]);
 
     }
 }
@@ -200,7 +201,7 @@ void print_arr(int table[n][n]){
 }
 void print_list(cell*head){
     cell*curr=head;
-    printf("cell_num in func=%d\n", cell_num);
+    //printf("cell_num in func=%d\n", cell_num);
     int i=1;
     while(curr!=NULL){
         printf("[%d] %s (%d,%d) energy:%d\n", i, curr->name, curr->x, curr->y, curr->energy);
@@ -241,7 +242,7 @@ void move_menu(unsigned char map[n][n], int table[n][n], cell*head, int x_choose
 }
 void move_north(unsigned char map[n][n], int table[n][n], cell*found, int x_choosed_cell, int y_choosed_cell){
     if( !(forbidden(map, x_choosed_cell, y_choosed_cell-1)) && !(occupied_table(table,x_choosed_cell, y_choosed_cell-1)) && in_map(n, x_choosed_cell, y_choosed_cell-1) ){
-        printf("1\n");
+        //printf("1\n");
         table[y_choosed_cell][x_choosed_cell]=0;
         table[y_choosed_cell-1][x_choosed_cell]=1;
         found->y=y_choosed_cell-1;
@@ -250,7 +251,7 @@ void move_north(unsigned char map[n][n], int table[n][n], cell*found, int x_choo
 
 void move_south(unsigned char map[n][n], int table[n][n], cell*found, int x_choosed_cell, int y_choosed_cell){
     if( !(forbidden(map, x_choosed_cell, y_choosed_cell+1)) && !(occupied_table(table,x_choosed_cell, y_choosed_cell+1)) && in_map(n, x_choosed_cell, y_choosed_cell+1) ){
-        printf("2\n");
+        //printf("2\n");
         table[y_choosed_cell][x_choosed_cell]=0;
         table[y_choosed_cell+1][x_choosed_cell]=1;
         found->y=y_choosed_cell+1;
@@ -259,7 +260,7 @@ void move_south(unsigned char map[n][n], int table[n][n], cell*found, int x_choo
 
 void evmove_northeast(unsigned char map[n][n], int table[n][n], cell*found, int x_choosed_cell, int y_choosed_cell){
     if( !(forbidden(map, x_choosed_cell+1, y_choosed_cell-1)) && !(occupied_table(table,x_choosed_cell+1, y_choosed_cell-1)) && in_map(n, x_choosed_cell+1, y_choosed_cell-1) ){
-        printf("ev3\n");
+        //printf("ev3\n");
         table[y_choosed_cell][x_choosed_cell]=0;
         table[y_choosed_cell-1][x_choosed_cell+1]=1;
         found->x=x_choosed_cell+1;
@@ -269,7 +270,7 @@ void evmove_northeast(unsigned char map[n][n], int table[n][n], cell*found, int 
 
 void odmove_northeast(unsigned char map[n][n], int table[n][n], cell*found, int x_choosed_cell, int y_choosed_cell){
     if( !(forbidden(map, x_choosed_cell+1, y_choosed_cell)) && !(occupied_table(table,x_choosed_cell+1, y_choosed_cell)) && in_map(n, x_choosed_cell+1, y_choosed_cell) ){
-        printf("od3\n");
+        //printf("od3\n");
         table[y_choosed_cell][x_choosed_cell]=0;
         table[y_choosed_cell][x_choosed_cell+1]=1;
         found->x=x_choosed_cell+1;
@@ -279,7 +280,7 @@ void odmove_northeast(unsigned char map[n][n], int table[n][n], cell*found, int 
 
 void evmove_northwest(unsigned char map[n][n], int table[n][n], cell*found, int x_choosed_cell, int y_choosed_cell){
     if( !(forbidden(map, x_choosed_cell-1, y_choosed_cell-1)) && !(occupied_table(table,x_choosed_cell-1, y_choosed_cell-1)) && in_map(n, x_choosed_cell-1, y_choosed_cell-1) ){
-        printf("ev4\n");
+        //printf("ev4\n");
         table[y_choosed_cell][x_choosed_cell]=0;
         table[y_choosed_cell-1][x_choosed_cell-1]=1;
         found->x=x_choosed_cell-1;
@@ -289,7 +290,7 @@ void evmove_northwest(unsigned char map[n][n], int table[n][n], cell*found, int 
 
 void odmove_northwest(unsigned char map[n][n], int table[n][n], cell*found, int x_choosed_cell, int y_choosed_cell){
     if( !(forbidden(map, x_choosed_cell-1, y_choosed_cell)) && !(occupied_table(table,x_choosed_cell-1, y_choosed_cell)) && in_map(n, x_choosed_cell-1, y_choosed_cell) ){
-        printf("od4\n");
+        //printf("od4\n");
         table[y_choosed_cell][x_choosed_cell]=0;
         table[y_choosed_cell][x_choosed_cell-1]=1;
         found->x=x_choosed_cell-1;
@@ -299,7 +300,7 @@ void odmove_northwest(unsigned char map[n][n], int table[n][n], cell*found, int 
 
 void evmove_southeast(unsigned char map[n][n], int table[n][n], cell*found, int x_choosed_cell, int y_choosed_cell){
     if( !(forbidden(map, x_choosed_cell+1, y_choosed_cell)) && !(occupied_table(table,x_choosed_cell+1, y_choosed_cell)) && in_map(n, x_choosed_cell+1, y_choosed_cell) ){
-        printf("ev5\n");
+       // printf("ev5\n");
         table[y_choosed_cell][x_choosed_cell]=0;
         table[y_choosed_cell][x_choosed_cell+1]=1;
         found->x=x_choosed_cell+1;
@@ -309,7 +310,7 @@ void evmove_southeast(unsigned char map[n][n], int table[n][n], cell*found, int 
 
 void odmove_southeast(unsigned char map[n][n], int table[n][n], cell*found, int x_choosed_cell, int y_choosed_cell){
     if( !(forbidden(map, x_choosed_cell+1, y_choosed_cell+1)) && !(occupied_table(table,x_choosed_cell+1, y_choosed_cell+1)) && in_map(n, x_choosed_cell+1, y_choosed_cell+1) ){
-        printf("od5\n");
+       // printf("od5\n");
         table[y_choosed_cell][x_choosed_cell]=0;
         table[y_choosed_cell+1][x_choosed_cell+1]=1;
         found->x=x_choosed_cell+1;
@@ -319,7 +320,7 @@ void odmove_southeast(unsigned char map[n][n], int table[n][n], cell*found, int 
 
 void evmove_southwest(unsigned char map[n][n], int table[n][n], cell*found, int x_choosed_cell, int y_choosed_cell){
     if( !(forbidden(map, x_choosed_cell-1, y_choosed_cell)) && !(occupied_table(table,x_choosed_cell-1, y_choosed_cell)) && in_map(n, x_choosed_cell-1, y_choosed_cell) ){
-        printf("ev6\n");
+       // printf("ev6\n");
         table[y_choosed_cell][x_choosed_cell]=0;
         table[y_choosed_cell][x_choosed_cell-1]=1;
         found->x=x_choosed_cell-1;
@@ -329,7 +330,7 @@ void evmove_southwest(unsigned char map[n][n], int table[n][n], cell*found, int 
 
 void odmove_southwest(unsigned char map[n][n], int table[n][n], cell*found, int x_choosed_cell, int y_choosed_cell){
     if( !(forbidden(map, x_choosed_cell-1, y_choosed_cell+1)) && !(occupied_table(table,x_choosed_cell-1, y_choosed_cell+1)) && in_map(n, x_choosed_cell-1, y_choosed_cell+1) ){
-        printf("od6\n");
+       // printf("od6\n");
         table[y_choosed_cell][x_choosed_cell]=0;
         table[y_choosed_cell+1][x_choosed_cell-1]=1;
         found->x=x_choosed_cell-1;
@@ -402,7 +403,7 @@ void boost_energy(cell*found, int energy[n][n], unsigned char map[n][n]){
     y=found->y;
     energy1=found->energy;
     if(is_energy_block(map, x,y)){
-            printf("if\n");
+           // printf("if\n");
         if(energy[y][x]>=15 && energy1<=85){
             energy[y][x]=energy[y][x]-15;
             (found->energy)=(found->energy)+15;
@@ -427,11 +428,11 @@ void boost_energy(cell*found, int energy[n][n], unsigned char map[n][n]){
 }
 
 void save(cell*head, unsigned char map[n][n]){
-    printf("***|n=%d\n", n);
+    //printf("***|n=%d\n", n);
     int i, j;
     for(i=0; i<n; i++){
     for(j=0; j<n; j++){
-        printf("***|map[%d][%d]= %c\n", i , j, map[i][j]);
+      //  printf("***|map[%d][%d]= %c\n", i , j, map[i][j]);
     }
 
 }
@@ -459,9 +460,9 @@ cell* load(unsigned char map[n][n], int energy[n][n], int table[n][n]){
 
     FILE* openmap=fopen("D:\savemap.bin", "rb");
     fread(&n, sizeof(n), 1, openmap);
-    printf("opened n=%ld\n", n);
+    //printf("opened n=%ld\n", n);
     int t, k;
-    memset(table, 0, sizeof(table)*2*2);
+    //memset(table, 0, sizeof(table)*2*2);
     for(t=0; t<n; t++){
         for(k=0; k<n; k++){
             printf("t=%d k=%d\n",t, k);
@@ -469,12 +470,12 @@ cell* load(unsigned char map[n][n], int energy[n][n], int table[n][n]){
             //printf("*in loop table[%d][%d]=%d\n",t, k, table[t][k]);
 
             energy[t][k]=0;
-            //table[t][k]=0;
+            table[t][k]=0;
         //sleep(7);
             fread(&map[t][k], sizeof(unsigned char), 1, openmap);
-            printf("in loop map[%d][%d]=%c\n",t, k, map[t][k]);
-            printf("in loop energy[%d][%d]=%d\n",t, k, energy[t][k]);
-            printf("in loop table[%d][%d]=%d\n",t, k, table[t][k]);
+            //printf("in loop map[%d][%d]=%c\n",t, k, map[t][k]);
+            //printf("in loop energy[%d][%d]=%d\n",t, k, energy[t][k]);
+            //printf("in loop table[%d][%d]=%d\n",t, k, table[t][k]);
             if(map[t][k]=='1'){
                 energy[t][k]=100;
             }
@@ -494,15 +495,15 @@ cell* load(unsigned char map[n][n], int energy[n][n], int table[n][n]){
         table[y][x]=1;
         printf("in file: table[%d][%d] = %d\n", y , x , table[y][x]);
         add_cell(&head, x,y, name, energy1);
-        printf("44\n");
+       // printf("44\n");
     }
     fclose(opencells);
     int v, p;
     for(v=0; v<n; v++){
                 for(p=0; p<n; p++){
-                    printf("*map[%d][%d]= %c\n", v, p , map[v][p]);
-                    printf("*table[%d][%d]= %d\n", v, p , table[v][p]);
-                    printf("*energy[%d][%d]= %d\n", v, p , energy[v][p]);
+                    //printf("*map[%d][%d]= %c\n", v, p , map[v][p]);
+                   // printf("*table[%d][%d]= %d\n", v, p , table[v][p]);
+                   // printf("*energy[%d][%d]= %d\n", v, p , energy[v][p]);
                 }
             }
 
@@ -520,7 +521,83 @@ int i, j;
                 scanf("%d", &second_decide);
                 switch(second_decide){
                 case 1:
-                    printf("x_choosed , y_choosed are %d %d\n", x_choosed_cell, y_choosed_cell);
+                   // printf("x_choosed , y_choosed are %d %d\n", x_choosed_cell, y_choosed_cell);
+                    move_menu(map, table , head, x_choosed_cell, y_choosed_cell);
+                    print_arr(table);
+                    printf("*test print\n");
+            my_print(map,table);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    founded=find_cell(head, x_choosed_cell, y_choosed_cell);
+                    boost_energy(founded, energy, map);
+                    break;
+                case 4:
+
+                    for(i=0; i<n; i++){
+                        for(j=0; j<n; j++){
+                          //  printf("***map[%d][%d]= %c\n", i , j, map[i][j]);
+                        }
+
+                    }
+                    save(head,map);
+                    break;
+                case 5:
+                    exit(0);
+
+                }
+            }
+
+}
+
+void multi_save(cell*head1, cell*head2, unsigned char map[n][n]){
+   // printf("***|n=%d\n", n);
+    int i, j;
+    for(i=0; i<n; i++){
+    for(j=0; j<n; j++){
+       // printf("***|map[%d][%d]= %c\n", i , j, map[i][j]);
+    }
+
+}
+    FILE* savecells=fopen("D:\savecells.txt", "w");
+
+    cell*curr;
+    for(curr=head1; curr->next!=NULL; curr=curr->next );
+    curr->next=head2;
+    cell*temp=head1;
+
+    while(temp!=NULL){
+        fprintf(savecells,"%s\nx=%d y=%d\nenergy=%d\n", temp->name, temp->x, temp->y, temp->energy );
+        temp=temp->next;
+    }
+    fclose(savecells);
+    FILE *savemap=fopen("D:\savemap.bin", "wb");
+    //cell*curr=head;
+    int q,w;
+    fwrite(&n, sizeof(unsigned int), 1 , savemap);
+    for(q=0; q<n; q++){
+        for(w=0; w<n; w++){
+                printf("%c\n", map[q][w]);
+            fwrite(&map[q][w], sizeof(unsigned char),1,savemap);
+            printf("**\n");
+        }
+    }
+}
+
+
+void multi_play_game(cell*head, cell*head1, unsigned char map[n][n], int table[n][n], int energy[n][n]){
+
+    cell*founded;
+    int i, j;
+
+                select_cell(head);
+                show_main_menu();
+                int second_decide;
+                scanf("%d", &second_decide);
+                switch(second_decide){
+                case 1:
+                 //   printf("x_choosed , y_choosed are %d %d\n", x_choosed_cell, y_choosed_cell);
                     move_menu(map, table , head, x_choosed_cell, y_choosed_cell);
                     print_arr(table);
                     break;
@@ -534,21 +611,65 @@ int i, j;
 
                     for(i=0; i<n; i++){
                         for(j=0; j<n; j++){
-                            printf("***map[%d][%d]= %c\n", i , j, map[i][j]);
+                          //  printf("***map[%d][%d]= %c\n", i , j, map[i][j]);
                         }
 
                     }
-                    save(head,map);
+                    multi_save(head,head1,map);
                     break;
                 case 5:
                     exit(0);
 
                 }
+}
+
+void my_print(unsigned char map[n][n], int table[n][n]){
+    int i, j, t, k;
+    for(t=0; t<n; t++){
+                    printf("%d   ", t);
+                }
+                printf("/\n");
+    for(i=0; i<n; i++){
+        for(j=0; j<n; j++){
+            if(table[i][j]!=0){
+                printf("%cX |", map[i][j]);
+            }
+            else
+                printf("%c  |", map[i][j]);
+        }
+        printf("%d\n", i);
+    }
+}
+
+void print_map(unsigned char map[n][n]){
+    int i, j;
+    for(i=0; i<2*n; i++, j=0){
+        for(j=0; j<n; j++){
+            if( i%2==0 ){
+                if( j%2==0 ){
+                    printf("%c ", map[i][j]);
+                }
+                if( j%2==1 ){
+                    printf("  ");
+
+                }
             }
 
+            if( i%2==1 ){
+                if(j%2==0){
+                    printf("  ");
+                }
+                if(j%2==1){
+                    printf("%c ", map[i-1][j]);
+                }
+            }
+        }
+    }
 }
+
 int main()
 {
+    system("color 57");
     srand(time(NULL));
     printf("welcome\n");
 
@@ -562,36 +683,43 @@ int main()
         int first_decide;
         scanf("%d", &first_decide);
         if(first_decide==1){
+            FILE* openmap=fopen("D:\savemap.bin", "rb");
+            fread(&n, sizeof(n), 1, openmap);
+            fclose(openmap);
             unsigned char map[n][n];
             int table[n][n];//store cells; 0 means that block is void of cells, 1 for single player cells and 2 for second player cells
             int energy[n][n];//stores energy sources
+           /// printf("***n=%d\n", n);
             cell*head=load(map, energy, table);
-            printf("%d*********\n", n);
+           // printf("%d*********\n", n);
             int v, p;
-            for(v=0; v<n; v++){
+            /*for(v=0; v<n; v++){
                 for(p=0; p<n; p++){
                     printf("map[%d][%d]= %c\n", v, p , map[v][p]);
                     printf("table[%d][%d]= %d\n", v, p , table[v][p]);
                     printf("energy[%d][%d]= %d\n", v, p , energy[v][p]);
                 }
-            }
+            }*/
             play_game(head, map,table,energy);
             break;
         }
         if(first_decide==2){
             fpp=fopen("D:\map.bin", "rb");
-            fread(&n, sizeof(n), 1, fpp);
-            printf("n=%ld\n", n);
+            fread(&n, sizeof(unsigned int), 1, fpp);
+           // printf("n=%ld\n", n);
             unsigned char map[n][n];
             int table[n][n];//store cells; 0 means that block is void of cells, 1 for single player cells and 2 for second player cells
             int energy[n][n];//stores energy sources
 
+
+            //
+            //print_map(map);
             int ii, jj;
             for(ii=0; ii<n; ii++){
                 for(jj=0; jj<n; jj++){
                     table[ii][jj]=0;
                     energy[ii][jj]=0;
-                    printf("*energy[%d][%d]=%d\n", ii, jj,energy[ii][jj]);
+                  //  printf("*energy[%d][%d]=%d\n", ii, jj,energy[ii][jj]);
                 }
             }
             int t, k;
@@ -606,21 +734,24 @@ int main()
             int i , j;
             for (i=0; i<n; i++){
                 for(j=0; j<n; j++){
-                    printf("map[%d][%d]= %c\n", i , j, map[i][j]);
-                    printf("energy[%d][%d]= %d\n", i, j , energy[i][j]);
+                   // printf("map[%d][%d]= %c\n", i , j, map[i][j]);
+                  //  printf("energy[%d][%d]= %d\n", i, j , energy[i][j]);
                 }
             }
             head=NULL;
             get_cells(&head, map, table);
             print_arr(table);
+            //printf("test print\n");
+            my_print(map,table);
             play_game(head, map, table, energy);
 
             break;
+
             }
             if(first_decide==3){
                 fpp=fopen("D:\map.bin", "rb");
                 fread(&n, sizeof(n), 1, fpp);
-                printf("n=%ld\n", n);
+               // printf("n=%ld\n", n);
                 unsigned char map[n][n];
                 int table[n][n];//store cells; 0 means that block is void of cells, 1 for single player cells and 2 for second player cells
                 int energy[n][n];//stores energy sources
@@ -630,7 +761,7 @@ int main()
                     for(jj=0; jj<n; jj++){
                         table[ii][jj]=0;
                         energy[ii][jj]=0;
-                        printf("*energy[%d][%d]=%d\n", ii, jj,energy[ii][jj]);
+                      //  printf("*energy[%d][%d]=%d\n", ii, jj,energy[ii][jj]);
                     }
                 }
                 int t, k;
@@ -645,8 +776,8 @@ int main()
                 int i , j;
                 for (i=0; i<n; i++){
                     for(j=0; j<n; j++){
-                        printf("map[%d][%d]= %c\n", i , j, map[i][j]);
-                        printf("energy[%d][%d]= %d\n", i, j , energy[i][j]);
+                      //  printf("map[%d][%d]= %c\n", i , j, map[i][j]);
+                      //  printf("energy[%d][%d]= %d\n", i, j , energy[i][j]);
                     }
                 }
                 head1=head2=NULL;
@@ -656,7 +787,14 @@ int main()
                 printf("Second player:\n");
                 get_cells(&head2, map, table);
                 print_arr(table);
-                play_game(head1,map, table, energy);
+                while(1){
+                       printf("First player round:\n");
+                    multi_play_game(head1, head2,map, table, energy);
+                        printf("Second player round:\n");
+                    multi_play_game(head2,head1, map, table, energy);
+                  //  printf("end\n");
+                }
+
                 break;
 
             }
