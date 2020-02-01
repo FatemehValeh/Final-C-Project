@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1579883706 source:c:\users\hussein valeh\desktop\fatemeh\university\ce\fundamentals\finalproject\finalproject\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1579949733 source:c:\users\hussein valeh\desktop\fatemeh\university\ce\fundamentals\finalproject\finalproject.readmap\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1580427245 source:c:\users\hussein valeh\desktop\fatemeh\university\ce\fundamentals\finalproject\finalproject.readmap - copy (2)\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<stdbool.h>
+	<string.h>
+
+1580501741 source:c:\users\hussein valeh\desktop\fatemeh\university\ce\fundamentals\finalproject\finalproject.readmap - copy 2 - copy - copy\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<stdbool.h>
+	<string.h>
+	<windows.h>
+
